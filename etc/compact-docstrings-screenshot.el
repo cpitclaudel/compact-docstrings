@@ -1,21 +1,44 @@
-(defvar my/fringe-width 6)
+;;; compact-docstrings-screenshot.el --- Make a screenshot of compact-docstrings
 
-(defconst my/script-dir
+;; Copyright (C) 2016  Free Software Foundation, Inc.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; This just makes a screenshot for this package's homepage.
+
+;;; Code:
+
+(defvar cds-fringe-width 6)
+
+(defconst cds-script-dir
   (file-name-directory (or load-file-name
                            buffer-file-name)))
 
-(defun my/cleanup ()
+(defun cds-cleanup ()
   (dolist (buffer (buffer-list))
     (kill-buffer buffer)))
 
-(defun my/prepare-UI ()
+(defun cds-prepare-UI ()
   "Prepare UI for taking a screenshot."
   (ido-mode)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
   (column-number-mode)
-  (fringe-mode (cons my/fringe-width my/fringe-width))
+  (fringe-mode (cons cds-fringe-width cds-fringe-width))
   (blink-cursor-mode -1)
   (setq-default cursor-type 'bar
                 split-width-threshold 80
@@ -33,12 +56,12 @@
   (set-frame-size nil 100 13)
   (redisplay t))
 
-(defun my/load-package ()
+(defun cds-load-package ()
   "Load package."
   (package-initialize)
   (load-library "compact-docstrings"))
 
-(defun my/load-example ()
+(defun cds-load-example ()
   "Prepare files and layout windows."
   (find-file "etc/before.py")
   (setq buffer-name "Regular docstrings")
@@ -46,28 +69,31 @@
   (setq buffer-name "Compact docstrings")
   (compact-docstrings-mode))
 
-(defun my/prepare-screenshot-1 ()
+(defun cds-prepare-screenshot-1 ()
   "Prepare for taking a screenshot."
-  (my/prepare-UI)
-  (my/load-package)
-  (my/load-example)
+  (cds-prepare-UI)
+  (cds-load-package)
+  (cds-load-example)
   (message nil))
 
-(defun my/save-screenshot ()
+(defun cds-save-screenshot ()
   "Save screenshot of current frame."
-  (let ((fname (expand-file-name "compact-docstrings.png" my/script-dir)))
+  (let ((fname (expand-file-name "compact-docstrings.png" cds-script-dir)))
     (process-lines "import" "-window" (frame-parameter nil 'outer-window-id)
                    fname)
     (process-lines "mogrify" "-strip" "-matte"
                    "-bordercolor" (face-attribute 'fringe :background)
-                   "-border" (format "0x%d" my/fringe-width) fname)
+                   "-border" (format "0x%d" cds-fringe-width) fname)
     (process-lines "optipng" "-o3" fname))
   (kill-emacs))
 
-(defun my/take-screenshot ()
-  (my/prepare-screenshot-1)
+(defun cds-take-screenshot ()
+  (cds-prepare-screenshot-1)
   (redisplay t)
-  (run-with-idle-timer 1 nil #'my/save-screenshot))
+  (run-with-idle-timer 1 nil #'cds-save-screenshot))
 
 (print default-directory)
-(run-with-idle-timer 0 nil #'my/take-screenshot)
+(run-with-idle-timer 0 nil #'cds-take-screenshot)
+
+(provide 'compact-docstrings-screenshot)
+;; compact-docstrings-screenshot.el ends here
