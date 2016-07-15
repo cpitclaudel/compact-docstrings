@@ -77,7 +77,7 @@
 
 (defun compact-docstrings--mode-on ()
   "Turn on `compact-docstrings-mode', if appropriate."
-  (when (derived-mode-p major-mode #'prog-mode)
+  (when (derived-mode-p #'prog-mode)
     (compact-docstrings-mode)))
 
 ;;;###autoload
