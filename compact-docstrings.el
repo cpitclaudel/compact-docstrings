@@ -67,7 +67,7 @@
 ;;;###autoload
 (define-minor-mode compact-docstrings-mode
   "Shrink empty lines in docstrings and doc comments."
-  :lighter " compact"
+  :lighter " →∥←"
   (if compact-docstrings-mode
       (font-lock-add-keywords nil compact-docstrings--keywords 'append)
     (font-lock-remove-keywords nil compact-docstrings--keywords))
