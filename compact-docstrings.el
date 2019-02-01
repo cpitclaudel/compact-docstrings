@@ -50,7 +50,7 @@
 (defun compact-docstrings--matcher (bound)
   "Find blank line in docstring, looking in point .. BOUND."
   (let ((found nil))
-    (while (and (not found) (re-search-forward "^\\s-*\n" bound t))
+    (while (and (not found) (re-search-forward "^\n" bound t))
       (let ((syntax (syntax-ppss)))
         (when (and (or (nth 3 syntax)  ;; In string
                        (nth 4 syntax)) ;; In comment
