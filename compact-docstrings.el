@@ -1,11 +1,11 @@
 ;;; compact-docstrings.el --- Shrink blank lines in docstrings and doc comments
 
-;; Copyright (C) 2016  Free Software Foundation, Inc.
+;; Copyright (C) 2016-2020  Free Software Foundation, Inc.
 
 ;; Author: Clément Pit-Claudel <clement.pitclaudel@live.com>
 ;; Maintainer: Clément Pit-Claudel <clement.pitclaudel@live.com>
 ;; URL: https://github.com/cpitclaudel/compact-docstrings
-;; Package-Version: 0.1
+;; Package-Version: 0.2
 ;; Keywords: convenience, faces, lisp, maint, c
 
 ;; This program is free software; you can redistribute it and/or modify
