@@ -1,4 +1,4 @@
-;;; compact-docstrings.el --- Shrink blank lines in docstrings and doc comments
+;;; compact-docstrings.el --- Shrink blank lines in docstrings and doc comments  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2016-2020  Free Software Foundation, Inc.
 
@@ -39,12 +39,10 @@
 
 (defface compact-docstrings-face
   '((t :height 0.5))
-  "Face applied to blank lines in docstrings."
-  :group 'compact-docstrings)
+  "Face applied to blank lines in docstrings.")
 
 (defcustom compact-docstrings-only-doc-blocks t
   "When nil, also shrink blank lines in regular strings and comments."
-  :group 'compact-docstrings
   :type 'boolean)
 
 (defun compact-docstrings--matcher (bound)
