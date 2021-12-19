@@ -62,7 +62,7 @@
     found))
 
 (defconst compact-docstrings--keywords
-  '((compact-docstrings--matcher 0 'compact-docstrings-face prepend)) 'append)
+  '((compact-docstrings--matcher 0 'compact-docstrings-face prepend)))
 
 ;;;###autoload
 (define-minor-mode compact-docstrings-mode
